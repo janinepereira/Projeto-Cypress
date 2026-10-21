@@ -15,7 +15,7 @@ export function salvarcadastro() {
 }
 
 export function fazercacadastro () {
-    cy.get('.swal2-title', { Timeout: 30000 }).should('have.text', 
+    cy.get('.swal2-title', { timeout: 30000 }).should('have.text', 
       'Cadastro realizado!')
 }
 
@@ -29,11 +29,11 @@ export function verificanomevazio(email) {
 }
 
 export function verificaemailvazio(email) {
-    cy.get('.errorLabel', { Timeout: 30000 }).should('have.text',
+    cy.get('.errorLabel', { timeout: 30000 }).should('have.text',
        'O campo e-mail deve ser prenchido corretamente');
 }
 
 export function verificasenhavazia (password) {
-    cy.get('#errorMessageFirstName', { Timeout: 30000 }).should('have.text', 
+    cy.get('#errorMessageFirstName', { timeout: 30000 }).should('have.text', 
       'O campo senha deve ter pelo menos 6 dígitos')
 }  

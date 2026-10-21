@@ -31,7 +31,7 @@ Cypress.Commands.add('Login', () => {
     cy.get('#user').type(email);
     cy.get('#password').type(password);
     cy.get('#btnLogin').click();
-    cy.get('.swal2-title', { Timeout: 30000 }).should('have.text', 
+    cy.get('.swal2-title', { timeout: 30000 }).should('have.text', 
       'Login realizado'
     );
     cy.get('.swal2-confirm').click()

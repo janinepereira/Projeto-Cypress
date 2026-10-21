@@ -1,41 +1,13 @@
-//funcionalidade
 /// <reference types="cypress"/>
 
 import { faker } from '@faker-js/faker'
 
-//importando com require
-const user_admin = require('../fixtures/user_admin.json')
-
-//importando com import
-import { email, password } from '../fixtures/user_admin.json'
 const login_page = require('../support/Pages/login_pages')
-
 
 describe('Login', () => {
 
-  //HOOKS
-  //Metodos/funcoes
-  //que sao executados
-  //não chamamos elas
-
-  //antes de todos os cenarios
   beforeEach(() => {
     cy.visit('/login')
-  })
-
-  //antes de CADA cenario
-  beforeEach(() => {
-    console.log('Antes de cada cenarios')
-  })
-
-  //depois de todos os cenarios
-  after(() => {
-    console.log('Depois de todos os cenarios')
-  })
-
-  // depois de CADA cenario
-  afterEach(() => {
-    console.log('Depois de cada cenarios')
   })
 
   it('Login com sucesso', () => {
@@ -43,18 +15,24 @@ describe('Login', () => {
     login_page.preenchersenha(faker.internet.password())
     login_page.clicaremlogin()
     login_page.verificalogin()
-  });
+  })
 
-  it('Login com senha invalido', () => {
+  it('Login sem informar a senha', () => {
     login_page.preencheremail(faker.internet.email({ provider: 'gmail.com' }))
     login_page.clicaremlogin()
     login_page.verificasenhainvalida()
-  });
+  })
 
-  it('Login com email invalido', () => {
+  it('Login sem informar o e-mail', () => {
     login_page.preenchersenha(faker.internet.password())
     login_page.clicaremlogin()
     login_page.verificaemailInvalido()
   })
 
-});
+  it('Login com e-mail em formato inválido', () => {
+    login_page.preencheremail('email_sem_arroba')
+    login_page.preenchersenha(faker.internet.password())
+    login_page.clicaremlogin()
+    login_page.verificaemailInvalido()
+  })
+})

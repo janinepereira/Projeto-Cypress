@@ -12,16 +12,16 @@ export function clicaremlogin () {
 }
 
 export function verificalogin () {
-    cy.get('#swal2-title', { Timeout: 30000 }).should('have.text', 
+    cy.get('#swal2-title', { timeout: 30000 }).should('have.text', 
       'Login realizado')
 }
 
 export function verificasenhainvalida (password) {
-    cy.get('.invalid_input', { Timeout: 30000 }).should('have.text', 
+    cy.get('.invalid_input', { timeout: 30000 }).should('have.text', 
       'Senha inválida.')
 }
 
 export function verificaemailInvalido(email) {
-    cy.get('.invalid_input', { Timeout: 30000 }).should('have.text',
+    cy.get('.invalid_input', { timeout: 30000 }).should('have.text',
         'E-mail inválido.');
 }

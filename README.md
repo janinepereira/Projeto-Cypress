@@ -13,9 +13,9 @@ https://github.com/user-attachments/assets/d89429a7-88d1-47ff-ad2e-6643662940a0
 
 | Funcionalidade | Cenários | Tipo |
 |---|---|---|
-| Login | Login com sucesso, senha não informada, e-mail não informado | Positivo e negativo |
+| Login | Login com sucesso, senha não informada, e-mail não informado, e-mail em formato inválido | Positivo e negativo |
 | Cadastro de usuário | Cadastro com sucesso, nome vazio, e-mail vazio, senha vazia | Positivo e negativo |
-| Checkout (dados de cobrança) | Validação de cada campo obrigatório vazio e de todos os campos vazios | Negativo |
+| Checkout (dados de cobrança) | Cadastro com sucesso, cada um dos 9 campos obrigatórios vazio e todos os campos vazios | Positivo e negativo |
 
 ## Estratégia e boas práticas aplicadas
 
@@ -23,12 +23,14 @@ https://github.com/user-attachments/assets/d89429a7-88d1-47ff-ad2e-6643662940a0
 - **Dados dinâmicos com Faker.js:** nomes, e-mails, senhas e endereços são gerados a cada execução, evitando dependência de massa fixa e conflitos de dados já cadastrados.
 - **Fixtures:** dados de usuário e de pagamento ficam em `cypress/fixtures`, fora do código de teste.
 - **Comando customizado `cy.Login()`:** reaproveita o fluxo de autenticação como pré-condição do checkout.
-- **Cenários negativos:** a maior parte da suíte valida mensagens de erro de campos obrigatórios, que é onde costumam aparecer os defeitos de formulário.
+- **Testes orientados a dados:** os cenários de campo obrigatório do checkout são gerados a partir de uma única lista de campos e mensagens, sem repetir código para cada caso.
+- **Cenários negativos com dupla validação:** além de verificar a mensagem de erro, o teste confirma que os dados não foram salvos.
 - **Integração contínua:** os testes rodam no GitHub Actions a cada push e pull request na branch `main`, e também podem ser disparados manualmente. Em caso de falha, os screenshots ficam disponíveis como artefato da execução.
 
 ## Estrutura do projeto
 
 ```
+estudos/                    # Exercícios de comandos básicos (fora da suíte do CI)
 cypress/
 ├── e2e/                    # Cenários de teste (*.cy.js)
 ├── fixtures/               # Massa de dados em JSON

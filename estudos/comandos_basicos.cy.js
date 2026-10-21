@@ -5,7 +5,7 @@ describe('Comandos básicos', () => {
     cy.visit('https://automationpratice.com.br/login')   
  });
     
-    it.only("Encontrar elementos", () =>{
+    it("Encontrar elementos", () =>{
      cy.visit('https://automationpratice.com.br/login')
      cy.get('#user').type('edu@teste.com')
      cy.get('#password').type('123456')
@@ -49,13 +49,13 @@ describe('Comandos básicos', () => {
 
      it('Checkbox/Radio' , () => {
        cy.visit('https://automationpratice.com.br/checkout-one')
-       cy.get('#materiaUncheccked').check ()
+       cy.get('#materialUnchecked').check ()
             
     })
 
      it('Checkbox/Radio' , () => {
        cy.visit('https://automationpratice.com.br/checkout-one')
-       cy.get('#materiaUncheccked').uncheck()
+       cy.get('#materialUnchecked').uncheck()
        cy.get('#css').check()
        
     })
