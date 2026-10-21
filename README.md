@@ -24,8 +24,12 @@ https://github.com/user-attachments/assets/d89429a7-88d1-47ff-ad2e-6643662940a0
 - **Fixtures:** dados de usuário e de pagamento ficam em `cypress/fixtures`, fora do código de teste.
 - **Comando customizado `cy.Login()`:** reaproveita o fluxo de autenticação como pré-condição do checkout.
 - **Testes orientados a dados:** os cenários de campo obrigatório do checkout são gerados a partir de uma única lista de campos e mensagens, sem repetir código para cada caso.
-- **Cenários negativos com dupla validação:** além de verificar a mensagem de erro, o teste confirma que os dados não foram salvos.
+- **Defeitos documentados:** comportamentos incorretos encontrados pela automação ficam registrados em [BUGS.md](BUGS.md), com um teste pendente (`it.skip`) que descreve o comportamento esperado.
 - **Integração contínua:** os testes rodam no GitHub Actions a cada push e pull request na branch `main`, e também podem ser disparados manualmente. Em caso de falha, os screenshots ficam disponíveis como artefato da execução.
+
+## Defeito encontrado pela automação
+
+Ao validar que o checkout não salva dados com campos obrigatórios vazios, a suíte revelou que o site exibe a mensagem de sucesso mesmo nessa situação (exceto para o campo de e-mail). Detalhes, passos para reproduzir e causa provável em [BUGS.md](BUGS.md).
 
 ## Estrutura do projeto
 
