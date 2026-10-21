@@ -1,43 +1,76 @@
-# 🚀 Automação de Testes com Cypress - Inserção de Dados de Simulação
+# Automação E2E com Cypress | Automation Practice
 
-## 🎯 Sobre o Projeto
-Este projeto de automação de testes foi desenvolvido para otimizar e garantir a qualidade no processo de entrada de dados. O foco principal da arquitetura é a leitura dinâmica de massas de dados através de folhas de cálculo Excel, permitindo que as simulações no sistema sejam executadas de forma automatizada, rápida e com elevada cobertura de cenários.
+[![Cypress Tests](https://github.com/janinepereira/Projeto-Cypress/actions/workflows/cypress.yml/badge.svg)](https://github.com/janinepereira/Projeto-Cypress/actions/workflows/cypress.yml)
+![Cypress](https://img.shields.io/badge/Cypress-15-17202C?logo=cypress&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
+![Faker](https://img.shields.io/badge/Faker.js-dados%20din%C3%A2micos-2E7D32)
 
-## 🛠️ Tecnologias e Ferramentas Utilizadas
-* **Cypress:** Framework principal para a automação dos testes End-to-End (E2E).
-* **JavaScript:** Linguagem de programação base para a criação dos scripts.
-* **Faker.js:** Geração de dados dinâmicos e aleatórios para simular cenários de teste reais de forma robusta.
-* **Integração com Excel:** Estratégia de *Data-Driven Testing* para alimentar os testes com diferentes conjuntos de dados a partir de folhas de cálculo.
-* **GitHub Actions:** Configuração de Integração Contínua (CI) para execução automatizada dos testes a cada nova alteração no código.
-
-🧠 **Hard Skills**
----
-
-### 💻 Automação E2E & Web
-<p align="left">
-  <img src="https://img.shields.io/badge/-Selenium-%2343B02A?style=for-the-badge&logo=selenium&logoColor=white" alt="Selenium" />
-  <img src="https://img.shields.io/badge/-Robot%20Framework-%23000000?style=for-the-badge&logo=robotframework&logoColor=white" alt="Robot Framework" />
-</p>
-
-
-## 🏗️ Estrutura e Estratégia
-A abordagem orientada a dados (*Data-Driven*) demonstra uma preocupação com a escalabilidade do projeto. Através da separação entre a lógica de teste e a massa de dados, é possível adicionar dezenas de novos cenários de simulação apenas atualizando a folha de cálculo, sem necessidade de alterar o código principal.
-
-## 🚀 Como Executar o Projeto Localmente
-
+Projeto de testes automatizados End-to-End com Cypress para o site de prática [Automation Practice](https://automationpratice.com.br), cobrindo os fluxos de **login**, **cadastro de usuário** e **checkout**, com execução automática a cada alteração via GitHub Actions.
 
 https://github.com/user-attachments/assets/d89429a7-88d1-47ff-ad2e-6643662940a0
 
+## O que é testado
 
+| Funcionalidade | Cenários | Tipo |
+|---|---|---|
+| Login | Login com sucesso, senha não informada, e-mail não informado | Positivo e negativo |
+| Cadastro de usuário | Cadastro com sucesso, nome vazio, e-mail vazio, senha vazia | Positivo e negativo |
+| Checkout (dados de cobrança) | Validação de cada campo obrigatório vazio e de todos os campos vazios | Negativo |
 
-1. Clone este repositório:
-   ```bash
-   git clone [https://github.com/janinepereira/qazandoaprendendogit.git](https://github.com/janinepereira/qazandoaprendendogit.git)
-   ```.
-   
-## 👩‍💻 Autora
+## Estratégia e boas práticas aplicadas
 
-**Janine Almeida**
-*Profissional de Quality Assurance (QA) focada em automação de testes.*
+- **Page Objects:** ações e validações de cada página ficam em `cypress/support/Pages`, separadas dos cenários. Se um seletor muda, a correção é feita em um único lugar.
+- **Dados dinâmicos com Faker.js:** nomes, e-mails, senhas e endereços são gerados a cada execução, evitando dependência de massa fixa e conflitos de dados já cadastrados.
+- **Fixtures:** dados de usuário e de pagamento ficam em `cypress/fixtures`, fora do código de teste.
+- **Comando customizado `cy.Login()`:** reaproveita o fluxo de autenticação como pré-condição do checkout.
+- **Cenários negativos:** a maior parte da suíte valida mensagens de erro de campos obrigatórios, que é onde costumam aparecer os defeitos de formulário.
+- **Integração contínua:** os testes rodam no GitHub Actions a cada push e pull request na branch `main`, e também podem ser disparados manualmente. Em caso de falha, os screenshots ficam disponíveis como artefato da execução.
 
-Janine Almeida, casada, mãe de pet e apaixonada por viagens.
+## Estrutura do projeto
+
+```
+cypress/
+├── e2e/                    # Cenários de teste (*.cy.js)
+├── fixtures/               # Massa de dados em JSON
+└── support/
+    ├── Pages/              # Page Objects (login, cadastro, checkout)
+    ├── commands_checkout.js  # Comando customizado cy.Login()
+    └── e2e.js
+.github/workflows/cypress.yml  # Pipeline de CI
+cypress.config.js              # baseUrl e timeouts
+```
+
+## Como executar
+
+Pré-requisitos: [Node.js](https://nodejs.org) 18 ou superior e Git.
+
+```bash
+git clone https://github.com/janinepereira/Projeto-Cypress.git
+cd Projeto-Cypress
+npm install
+```
+
+Abrir o Cypress no modo interativo:
+
+```bash
+npx cypress open
+```
+
+Rodar todos os testes no terminal (modo headless):
+
+```bash
+npx cypress run
+```
+
+## Próximos passos
+
+- [ ] Relatório HTML com Mochawesome publicado no pipeline
+- [ ] Fluxo de checkout completo até a confirmação do pedido
+- [ ] Padronização de nomes das funções dos Page Objects
+- [ ] Testes de API com `cy.request()`
+
+## Autora
+
+**Janine Pereira de Almeida** | QA Analyst Sênior
+
+[LinkedIn](https://www.linkedin.com/in/jpereiraalmeida) · [GitHub](https://github.com/janinepereira)
