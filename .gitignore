@@ -1,1 +1,14 @@
+# Dependências
 node_modules/
+
+# Artefatos gerados pelo Cypress
+cypress/screenshots/
+cypress/videos/
+mochawesome-report/
+
+# Configurações locais do editor e de ferramentas de IA
+.claude/
+.mcp.json
+
+# Arquivos grandes de mídia
+*.mp4
